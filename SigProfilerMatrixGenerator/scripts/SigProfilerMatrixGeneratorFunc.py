@@ -1335,7 +1335,7 @@ def SigProfilerMatrixGeneratorFunc(
                 project, vcf_path, reference_genome, output_path, ncbi_chrom, log_file
             )
         elif file_extension == "vcf":
-            snv, indel, skipped, samples = convertIn.convertVCF(
+            snv, indel, skipped, samples = convertIn.my_convertVCF(
                 project, vcf_path, reference_genome, output_path, ncbi_chrom, log_file
             )
         elif file_extension == "maf":
@@ -1347,8 +1347,17 @@ def SigProfilerMatrixGeneratorFunc(
                 project, vcf_path, reference_genome, output_path, ncbi_chrom, log_file
             )
         else:
-            print("File format not supported")
-
+            print("File format not supported")      
+        """    
+        elif file_extension == "gz" and file_name[-2] == "multisample_vcf":
+            snv, indel, skipped, samples = convertIn.convertMutliSampleVCF(
+                project, vcf_path, reference_genome, output_path, ncbi_chrom, log_file, binary_gz=True
+            )
+        elif file_extension == "multisample_vcf":
+            snv, indel, skipped, samples = convertIn.convertMutliSampleVCF(
+                project, vcf_path, reference_genome, output_path, ncbi_chrom, log_file, binary_gz=False
+            )
+        """
     samples = sorted(samples)
     skipped_muts += skipped
 

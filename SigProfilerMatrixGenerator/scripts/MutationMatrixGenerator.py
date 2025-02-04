@@ -932,7 +932,7 @@ def catalogue_generator_single(
                         file=out,
                     )
                     gene_ind += 1
-                out.close()
+                out.close() # Why is the log file being closed here?
                 with open(output_matrix + "gene_strand_bias_counts_SNV.txt") as f2:
                     lines = [line.strip().split() for line in f2]
                 output = open(output_matrix + "gene_strand_bias_counts_SNV.txt", "w")
@@ -1238,6 +1238,7 @@ def catalogue_generator_INDEL_single(
                     continue
 
                 if line == prev_line:
+                    # Wrong error message: This function is for INDELs not SBS; Also duplicate lines were checked for in convert_input_to_simple_files.py (assuming sorted input files; vcf) and should not be checked again here.
                     print(
                         "There appears to be a duplicate single base substitution. Skipping this mutation: "
                         + chrom
